@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d9488">
+  <title>عيادتي</title>
+  <style>
+    :root {
+      --teal-main: #0d9488;
+      --teal-dark: #0f766e;
+      --teal-soft: #f0fdfa;
+      --teal-border: #ccfbf1;
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --success-bg: #dcfce7;
+      --success-text: #166534;
+      --wa-bg: #e7f9ee;
+      --wa-text: #15803d;
+      --wa-border: #bbf7d0;
+      --warn-bg: #fef3c7;
+      --warn-text: #92400e;
+      --danger-bg: #fee2e2;
+      --danger-text: #991b1b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding-bottom: 40px;
+    }
+    .hero-header {
+      background: linear-gradient(135deg, #0f766e 0%, #0d9488 65%, #14b8a6 100%);
+      color: #ffffff;
+      padding: 16px 16px 22px 16px;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      box-shadow: 0 8px 22px rgba(13, 148, 136, 0.2);
+    }
+    .top-nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .top-back-btn {
+      width: auto;
+      margin: 0;
+      padding: 7px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .top-back-btn:active {
+      background: rgba(255, 255, 255, 0.28);
+    }
+    .hero-brand {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .hero-icon-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      font-size: 24px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .hero-icon-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-title {
+      margin: 0;
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .hero-desc {
+      margin: 6px 0 0 0;
+      font-size: 13px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.92);
+    }
+    .hero-search {
+      width: 100%;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: none;
+      background: #ffffff;
+      color: var(--text);
+      font-size: 14px;
+    }
+    .container { padding: 14px; }
+    .toolbar-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .manage-btn {
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      width: auto;
+      margin: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .manage-btn.active {
+      background: var(--teal-dark);
+      color: #ffffff;
+      border-color: var(--teal-dark);
+    }
+    .list-heading-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .list-heading { margin: 0; font-size: 18px; font-weight: 800; }
+    .list-count { font-size: 13px; color: var(--muted); font-weight: 600; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    input, select, button {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 8px;
+      border-radius: 11px;
+      border: 1px solid #cbd5e1;
+      font-size: 14px;
+      font-family: inherit;
+      background: var(--surface);
+      color: var(--text);
+    }
+    input[type="file"] { padding: 7px; font-size: 12px; background: var(--surface-soft); }
+    button {
+      background: var(--teal-main);
+      color: #ffffff;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-dark { background: var(--text); }
+    .btn-cancel { background: #64748b; margin-top: 6px; }
+    .btn-soft {
+      background: #e2e8f0;
+      color: var(--text);
+      width: auto;
+      padding: 7px 11px;
+      font-size: 12px;
+      margin: 0;
+      border-radius: 10px;
+    }
+    .btn-edit {
+      background: var(--warn-bg);
+      color: var(--warn-text);
+      width: auto;
+      padding: 6px 11px;
+      font-size: 12px;
+      margin: 0;
+      border-radius: 9px;
+    }
+    .btn-icon-pick {
+      background: var(--teal-soft);
+      color: var(--teal-dark);
+      border: 1px solid var(--teal-border);
+      width: auto;
+      padding: 6px 11px;
+      font-size: 12px;
+      margin: 0;
+      border-radius: 9px;
+    }
+    .btn-del {
+      background: var(--danger-bg);
+      color: var(--danger-text);
+      width: auto;
+      padding: 6px 11px;
+      font-size: 12px;
+      margin: 0;
+      border-radius: 9px;
+    }
+    .btn-call {
+      background: var(--teal-soft);
+      color: var(--teal-dark);
+      border: 1px solid var(--teal-border);
+      width: auto;
+      padding: 8px 13px;
+      font-size: 12px;
+      margin: 0;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      font-weight: 700;
+    }
+    .btn-wa {
+      background: var(--wa-bg);
+      color: var(--wa-text);
+      border: 1px solid var(--wa-border);
+      width: auto;
+      padding: 8px 13px;
+      font-size: 12px;
+      margin: 0;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      font-weight: 700;
+    }
+    .quick-presets { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .preset-chip {
+      width: auto;
+      margin: 0;
+      padding: 6px 11px;
+      font-size: 12px;
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--text);
+      border: 1px solid #cbd5e1;
+      font-weight: 600;
+    }
+    .preset-chip.selected {
+      background: var(--teal-soft);
+      color: var(--teal-dark);
+      border-color: var(--teal-main);
+    }
+    .preview-mini-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: var(--surface-soft);
+      border: 1px dashed #cbd5e1;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .thumb-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--teal-soft);
+      border: 1px solid var(--teal-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--teal-dark);
+    }
+    .thumb-box img { width: 100%; height: 100%; object-fit: cover; }
+    .spec-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+      cursor: pointer;
+    }
+    .spec-card-main {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .spec-arrow { color: #94a3b8; font-size: 18px; font-weight: 700; }
+    .spec-text-col { flex: 1; text-align: right; }
+    .spec-card-title { margin: 0 0 6px 0; font-size: 17px; font-weight: 800; }
+    .spec-card-desc { margin: 0; font-size: 13px; line-height: 1.5; color: var(--muted); }
+    .spec-card-foot {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .avail-label { color: var(--muted); font-weight: 600; }
+    .avail-label.has-docs { color: var(--teal-dark); font-weight: 700; }
+    .doc-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+    .doc-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .doc-identity { display: flex; align-items: center; gap: 10px; }
+    .doc-name { margin: 0; font-size: 16px; font-weight: 800; }
+    .doc-spec-sub { font-size: 12px; color: var(--teal-dark); font-weight: 700; margin-top: 2px; }
+    .price-tag {
+      background: var(--success-bg);
+      color: var(--success-text);
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #334155;
+      background: var(--surface-soft);
+      padding: 10px;
+      border-radius: 12px;
+    }
+    .card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .backup-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .empty-msg {
+      text-align: center;
+      color: var(--muted);
+      background: var(--surface);
+      padding: 24px 14px;
+      border-radius: 18px;
+      border: 1px dashed #cbd5e1;
+      font-size: 14px;
+    }
+    .admin-panel { display: none; }
+    body.manage-open .admin-panel { display: block; }
+  </style>
+</head>
+<body>
+
+  <header class="hero-header">
+    <div class="top-nav-bar">
+      <button type="button" id="topBackBtn" class="top-back-btn" onclick="handleTopBack()" title="رجوع للخلف">
+        <span>→</span>
+        <span id="topBackLabel">رجوع</span>
+      </button>
+    </div>
+
+    <div class="hero-brand">
+      <div id="appIconBadge" class="hero-icon-badge" onclick="onHeaderIconClick()" title="أيقونة التطبيق">🩺</div>
+      <div>
+        <h1 id="brandTitleDisplay" class="hero-title">دليل التخصصات والأطباء</h1>
+        <p id="brandDescDisplay" class="hero-desc">اختر التخصص الطبي المناسب للاطلاع على أسماء الأطباء وأيام ومواعيد القدوم وسعر تذكرة الكشف.</p>
+      </div>
+    </div>
+    <input type="file" id="appIconInput" accept="image/*" style="display:none;" onchange="handleAppIconUpload(event)">
+    <input type="text" id="searchBox" class="hero-search" placeholder="ابحث عن تخصص أو طبيب..." oninput="render()">
+  </header>
+
+  <main class="container">
+    <div class="toolbar-row">
+      <button type="button" id="toggleManageBtn" class="manage-btn" onclick="toggleManageMode()">
+        <span>⚙</span>
+        <span id="toggleManageText">إدارة الدليل</span>
+      </button>
+      <button type="button" id="backBtn" class="btn-soft" style="display:none;" onclick="goBackToSpecs()">← رجوع للتخصصات</button>
+    </div>
+
+    <div class="card admin-panel">
+      <div class="card-head">
+        <strong>هوية الدليل وأيقونة التطبيق</strong>
+        <button type="button" class="btn-soft" onclick="resetAppBranding()">استعادة الافتراضي</button>
+      </div>
+      <div class="row">
+        <input type="text" id="customTitleInput" placeholder="عنوان الدليل (مثال: عيادتي)" oninput="updateAppTitle(this.value)">
+        <input type="file" id="appIconInputAlt" accept="image/*" onchange="handleAppIconUpload(event)">
+      </div>
+      <input type="text" id="customDescInput" placeholder="وصف مختصر يظهر أسفل العنوان..." oninput="updateAppDesc(this.value)">
+    </div>
+
+    <div class="card admin-panel">
+      <strong>1. إضافة تخصص طبي</strong>
+      <input type="text" id="specName" placeholder="اسم التخصص (مثال: طبيب باطنة، طبيب قلب، طبيب عظام...)">
+      <input type="text" id="specDesc" placeholder="وصف مختصر للتخصص (مثال: أمراض الجهاز الهضمي والسكري والضغط)">
+      <label style="display:block; font-size:12px; color:#475569; margin-top:10px; font-weight:700;">أيقونة التخصص (اختر رمزاً أو ارفع صورة):</label>
+      <div id="specPresetChips" class="quick-presets"></div>
+      <input type="file" id="specIconFile" accept="image/*" onchange="handleNewSpecFile(event)">
+      <div class="preview-mini-box">
+        <div id="newSpecPreview" class="thumb-box">🩺</div>
+        <span>معاينة أيقونة التخصص</span>
+      </div>
+      <button type="button" class="btn-dark" onclick="addSpecialty()">إضافة التخصص</button>
+    </div>
+
+    <div class="card admin-panel">
+      <strong id="formTitle">2. إضافة طبيب داخل تخصص</strong>
+      <select id="specSelect"></select>
+      <input type="text" id="docName" placeholder="اسم الطبيب">
+      <div class="row">
+        <input type="text" id="workDays" placeholder="أيام العمل (مثال: السبت - الأربعاء)">
+        <input type="text" id="workTime" placeholder="الزمن (مثال: 9 ص - 2 م)">
+      </div>
+      <div class="row">
+        <input type="text" id="location" placeholder="الموقع (مثال: الطابق 1 - غرفة 4)">
+        <input type="number" id="ticketPrice" placeholder="سعر التذكرة (مثال: 40000)">
+      </div>
+      <div class="row">
+        <input type="tel" id="bookingNo" placeholder="رقم الاتصال للحجز">
+        <input type="tel" id="whatsappNo" placeholder="رقم واتساب للحجز (مثال: 0912345678)">
+      </div>
+      <label style="display:block; font-size:12px; color:#475569; margin-top:10px; font-weight:700;">صورة أو أيقونة الطبيب (اختياري):</label>
+      <div id="docPresetChips" class="quick-presets"></div>
+      <input type="file" id="docIconFile" accept="image/*" onchange="handleNewDocFile(event)">
+      <div class="preview-mini-box">
+        <div id="newDocPreview" class="thumb-box">👨‍⚕️</div>
+        <span>معاينة صورة/أيقونة الطبيب</span>
+      </div>
+      <button type="button" id="saveBtn" onclick="saveDoctor()">حفظ بيانات الطبيب</button>
+      <button type="button" id="cancelBtn" class="btn-cancel" style="display:none;" onclick="cancelEdit()">إلغاء التعديل</button>
+    </div>
+
+    <input type="file" id="quickCardIconInput" accept="image/*" style="display:none;" onchange="handleQuickCardIconChange(event)">
+
+    <div class="list-heading-row">
+      <h2 id="listHeading" class="list-heading">التخصصات الطبية</h2>
+      <span id="listCount" class="list-count"></span>
+    </div>
+
+    <div id="output"></div>
+
+    <div class="card admin-panel" style="margin-top:18px;">
+      <strong>نسخ احتياطي للبيانات</strong>
+      <div class="backup-row">
+        <button type="button" class="btn-dark" onclick="exportBackup()">تصدير نسخة احتياطية</button>
+        <button type="button" onclick="document.getElementById('importFileInput').click()">استيراد نسخة</button>
+      </div>
+      <input type="file" id="importFileInput" accept=".json,application/json" style="display:none;" onchange="importBackup(event)">
+    </div>
+  </main>
+
+  <script>
+    const DEFAULT_TITLE = 'دليل التخصصات والأطباء';
+    const DEFAULT_DESC = 'اختر التخصص الطبي المناسب للاطلاع على أسماء الأطباء وأيام ومواعيد القدوم وسعر تذكرة الكشف.';
+
+    const PRESET_ICONS = [
+      { key: 'med', label: 'طبي', val: '🩺' },
+      { key: 'heart', label: 'قلب', val: '❤️' },
+      { key: 'bone', label: 'عظام', val: '🦴' },
+      { key: 'kid', label: 'أطفال', val: '👶' },
+      { key: 'eye', label: 'عيون', val: '👁️' },
+      { key: 'doc', label: 'طبيب', val: '👨‍⚕️' }
+    ];
+
+    let data = JSON.parse(localStorage.getItem('clinics_directory') || '[]');
+    let appTitle = localStorage.getItem('clinics_app_title') || DEFAULT_TITLE;
+    let appDesc = localStorage.getItem('clinics_app_desc') || DEFAULT_DESC;
+    let appIcon = localStorage.getItem('clinics_app_icon') || '🩺';
+    let isManageMode = localStorage.getItem('clinics_manage_mode') === 'true';
+
+    let selectedSpecId = null;
+    let editingSpecId = null;
+    let editingDocId = null;
+    let draftSpecIcon = '🩺';
+    let draftDocIcon = '👨‍⚕️';
+    let quickTarget = null;
+
+    function handleTopBack() {
+      const searchBox = document.getElementById('searchBox');
+      if (searchBox && searchBox.value.trim()) {
+        searchBox.value = '';
+        render();
+        return;
+      }
+      if (selectedSpecId !== null) {
+        selectedSpecId = null;
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      if (isManageMode) {
+        isManageMode = false;
+        localStorage.setItem('clinics_manage_mode', 'false');
+        applyManageModeUI();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      if (window.history.length > 1) {
+        window.history.back();
+      }
+    }
+
+    function renderIconContent(container, iconVal, altText) {
+      if (!container) return;
+      if (iconVal && iconVal.startsWith('data:image/')) {
+        container.innerHTML = `<img src="${iconVal}" alt="${altText || ''}">`;
+      } else {
+        container.textContent = iconVal || '🩺';
+      }
+    }
+
+    function getIconHtml(iconVal, altText) {
+      if (iconVal && iconVal.startsWith('data:image/')) {
+        return `<img src="${iconVal}" alt="${altText || ''}">`;
+      }
+      return iconVal || '🩺';
+    }
+
+    function formatWhatsAppNumber(rawPhone) {
+      let digits = (rawPhone || '').replace(/[^\d]/g, '');
+      if (!digits) return '';
+      if (digits.startsWith('00')) digits = digits.slice(2);
+      else if (digits.startsWith('0') && digits.length === 10) digits = '249' + digits.slice(1);
+      return digits;
+    }
+
+    function buildWhatsAppUrl(rawPhone, docName, specName) {
+      const waNum = formatWhatsAppNumber(rawPhone);
+      if (!waNum) return '';
+      const msg = `السلام عليكم، أرغب في حجز موعد مع ${docName} (${specName}).`;
+      return `https://wa.me/${waNum}?text=${encodeURIComponent(msg)}`;
+    }
+
+    function applyBrandingUI() {
+      document.title = appTitle || DEFAULT_TITLE;
+      document.getElementById('brandTitleDisplay').textContent = appTitle || DEFAULT_TITLE;
+      document.getElementById('brandDescDisplay').textContent = appDesc || DEFAULT_DESC;
+      document.getElementById('customTitleInput').value = appTitle === DEFAULT_TITLE ? '' : appTitle;
+      document.getElementById('customDescInput').value = appDesc === DEFAULT_DESC ? '' : appDesc;
+      renderIconContent(document.getElementById('appIconBadge'), appIcon, 'شعار');
+    }
+
+    function updateAppTitle(val) {
+      appTitle = (val || '').trim() || DEFAULT_TITLE;
+      localStorage.setItem('clinics_app_title', appTitle);
+      applyBrandingUI();
+    }
+
+    function updateAppDesc(val) {
+      appDesc = (val || '').trim() || DEFAULT_DESC;
+      localStorage.setItem('clinics_app_desc', appDesc);
+      applyBrandingUI();
+    }
+
+    function onHeaderIconClick() {
+      if (isManageMode) document.getElementById('appIconInput').click();
+    }
+
+    function readCompressedImage(file, maxSize, cb) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement('canvas');
+          let w = img.width, h = img.height;
+          if (w > h && w > maxSize) { h = Math.round((h * maxSize) / w); w = maxSize; }
+          else if (h >= w && h > maxSize) { w = Math.round((w * maxSize) / h); h = maxSize; }
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+          cb(canvas.toDataURL('image/png', 0.85));
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function handleAppIconUpload(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      readCompressedImage(file, 192, function(url) {
+        appIcon = url;
+        localStorage.setItem('clinics_app_icon', appIcon);
+        applyBrandingUI();
+      });
+    }
+
+    function resetAppBranding() {
+      appTitle = DEFAULT_TITLE;
+      appDesc = DEFAULT_DESC;
+      appIcon = '🩺';
+      localStorage.setItem('clinics_app_title', appTitle);
+      localStorage.setItem('clinics_app_desc', appDesc);
+      localStorage.setItem('clinics_app_icon', appIcon);
+      applyBrandingUI();
+    }
+
+    function renderPresetChips() {
+      document.getElementById('specPresetChips').innerHTML = PRESET_ICONS.map(p => `
+        <button type="button" class="preset-chip ${draftSpecIcon === p.val ? 'selected' : ''}"
+          onclick="selectDraftSpecIcon('${p.val}')">${p.val} ${p.label}</button>
+      `).join('');
+
+      document.getElementById('docPresetChips').innerHTML = PRESET_ICONS.map(p => `
+        <button type="button" class="preset-chip ${draftDocIcon === p.val ? 'selected' : ''}"
+          onclick="selectDraftDocIcon('${p.val}')">${p.val} ${p.label}</button>
+      `).join('');
+
+      renderIconContent(document.getElementById('newSpecPreview'), draftSpecIcon, 'تخصص');
+      renderIconContent(document.getElementById('newDocPreview'), draftDocIcon, 'طبيب');
+    }
+
+    function selectDraftSpecIcon(val) {
+      draftSpecIcon = val;
+      document.getElementById('specIconFile').value = '';
+      renderPresetChips();
+    }
+
+    function selectDraftDocIcon(val) {
+      draftDocIcon = val;
+      document.getElementById('docIconFile').value = '';
+      renderPresetChips();
+    }
+
+    function handleNewSpecFile(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      readCompressedImage(file, 140, function(url) {
+        draftSpecIcon = url;
+        renderPresetChips();
+      });
+    }
+
+    function handleNewDocFile(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      readCompressedImage(file, 140, function(url) {
+        draftDocIcon = url;
+        renderPresetChips();
+      });
+    }
+
+    function triggerQuickIconEdit(type, specId, docId, event) {
+      if (event) event.stopPropagation();
+      if (!isManageMode) return;
+      quickTarget = { type, specId, docId };
+      document.getElementById('quickCardIconInput').value = '';
+      document.getElementById('quickCardIconInput').click();
+    }
+
+    function handleQuickCardIconChange(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file || !quickTarget) return;
+      const target = { ...quickTarget };
+      quickTarget = null;
+      readCompressedImage(file, 140, function(url) {
+        const spec = data.find(s => s.id === target.specId);
+        if (!spec) return;
+        if (target.type === 'spec') spec.icon = url;
+        else if (target.type === 'doc') {
+          const doc = spec.doctors.find(d => d.id === target.docId);
+          if (doc) doc.icon = url;
+        }
+        save();
+      });
+    }
+
+    function applyManageModeUI() {
+      document.body.classList.toggle('manage-open', isManageMode);
+      const btn = document.getElementById('toggleManageBtn');
+      const txt = document.getElementById('toggleManageText');
+      if (isManageMode) {
+        btn.classList.add('active');
+        txt.textContent = 'العودة لعرض المراجع';
+      } else {
+        btn.classList.remove('active');
+        txt.textContent = 'إدارة الدليل';
+        cancelEdit();
+      }
+      render();
+    }
+
+    function toggleManageMode() {
+      isManageMode = !isManageMode;
+      localStorage.setItem('clinics_manage_mode', String(isManageMode));
+      applyManageModeUI();
+    }
+
+    function save() {
+      localStorage.setItem('clinics_directory', JSON.stringify(data));
+      render();
+    }
+
+    function addSpecialty() {
+      if (!isManageMode) return;
+      const name = document.getElementById('specName').value.trim();
+      const desc = document.getElementById('specDesc').value.trim();
+      if (!name) return alert('اكتب اسم التخصص');
+      data.push({ id: Date.now(), name, desc, icon: draftSpecIcon || '🩺', doctors: [] });
+      document.getElementById('specName').value = '';
+      document.getElementById('specDesc').value = '';
+      document.getElementById('specIconFile').value = '';
+      draftSpecIcon = '🩺';
+      renderPresetChips();
+      save();
+    }
+
+    function openSpecialty(specId) {
+      selectedSpecId = specId;
+      render();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goBackToSpecs() {
+      selectedSpecId = null;
+      render();
+    }
+
+    function clearForm() {
+      ['docName','workDays','workTime','location','bookingNo','whatsappNo','ticketPrice'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('docIconFile').value = '';
+      draftDocIcon = '👨‍⚕️';
+      editingSpecId = null;
+      editingDocId = null;
+      document.getElementById('formTitle').textContent = '2. إضافة طبيب داخل تخصص';
+      document.getElementById('saveBtn').textContent = 'حفظ بيانات الطبيب';
+      document.getElementById('cancelBtn').style.display = 'none';
+      renderPresetChips();
+    }
+
+    function startEditDoctor(specId, docId, event) {
+      if (event) event.stopPropagation();
+      if (!isManageMode) return;
+      const spec = data.find(s => s.id === specId);
+      const doc = spec && spec.doctors.find(d => d.id === docId);
+      if (!doc) return;
+      editingSpecId = specId;
+      editingDocId = docId;
+      draftDocIcon = doc.icon || '👨‍⚕️';
+      document.getElementById('specSelect').value = specId;
+      document.getElementById('docName').value = doc.docName || '';
+      document.getElementById('workDays').value = doc.workDays || '';
+      document.getElementById('workTime').value = doc.workTime || '';
+      document.getElementById('location').value = doc.location || '';
+      document.getElementById('bookingNo').value = doc.bookingNo || '';
+      document.getElementById('whatsappNo').value = doc.whatsappNo || '';
+      document.getElementById('ticketPrice').value = doc.ticketPrice || '';
+      document.getElementById('formTitle').textContent = 'تعديل بيانات الطبيب';
+      document.getElementById('saveBtn').textContent = 'تحديث بيانات الطبيب';
+      document.getElementById('cancelBtn').style.display = 'block';
+      renderPresetChips();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function cancelEdit() { clearForm(); }
+
+    function saveDoctor() {
+      if (!isManageMode) return;
+      const targetSpecId = Number(document.getElementById('specSelect').value);
+      const docName = document.getElementById('docName').value.trim();
+      const workDays = document.getElementById('workDays').value.trim();
+      const workTime = document.getElementById('workTime').value.trim();
+      const location = document.getElementById('location').value.trim();
+      const bookingNo = document.getElementById('bookingNo').value.trim();
+      const whatsappNo = document.getElementById('whatsappNo').value.trim();
+      const ticketPrice = document.getElementById('ticketPrice').value.trim();
+
+      if (!targetSpecId) return alert('أضف تخصصاً أولاً');
+      if (!docName) return alert('اكتب اسم الطبيب');
+
+      if (editingDocId !== null && editingSpecId !== null) {
+        const oldSpec = data.find(s => s.id === editingSpecId);
+        const newSpec = data.find(s => s.id === targetSpecId);
+        if (!oldSpec || !newSpec) return;
+        const idx = oldSpec.doctors.findIndex(d => d.id === editingDocId);
+        if (idx === -1) return;
+        const updated = { id: editingDocId, docName, workDays, workTime, location, bookingNo, whatsappNo, ticketPrice, icon: draftDocIcon || '👨‍⚕️' };
+        if (editingSpecId === targetSpecId) oldSpec.doctors[idx] = updated;
+        else { oldSpec.doctors.splice(idx, 1); newSpec.doctors.push(updated); }
+        clearForm();
+        selectedSpecId = targetSpecId;
+        save();
+        return;
+      }
+
+      const spec = data.find(s => s.id === targetSpecId);
+      spec.doctors.push({ id: Date.now(), docName, workDays, workTime, location, bookingNo, whatsappNo, ticketPrice, icon: draftDocIcon || '👨‍⚕️' });
+      clearForm();
+      save();
+    }
+
+    function deleteSpecialty(specId, event) {
+      if (event) event.stopPropagation();
+      if (!isManageMode) return;
+      data = data.filter(s => s.id !== specId);
+      if (selectedSpecId === specId) selectedSpecId = null;
+      if (editingSpecId === specId) clearForm();
+      save();
+    }
+
+    function deleteDoctor(specId, docId) {
+      if (!isManageMode) return;
+      const spec = data.find(s => s.id === specId);
+      if (spec) spec.doctors = spec.doctors.filter(d => d.id !== docId);
+      if (editingDocId === docId) clearForm();
+      save();
+    }
+
+    function renderDoctorCard(spec, d, showSpecBadge) {
+      const cleanPhone = (d.bookingNo || '').replace(/[^\d+]/g, '');
+      const callBtn = cleanPhone ? `<a class="btn-call" href="tel:${cleanPhone}">اتصال للحجز</a>` : '';
+      const waUrl = buildWhatsAppUrl(d.whatsappNo || d.bookingNo || '', d.docName, spec.name);
+      const waBtn = waUrl ? `<a class="btn-wa" href="${waUrl}" target="_blank" rel="noopener">حجز واتساب</a>` : '';
+      const manageBtns = isManageMode ? `
+        <button type="button" class="btn-icon-pick" onclick="triggerQuickIconEdit('doc', ${spec.id}, ${d.id}, event)">تغيير الصورة</button>
+        <button type="button" class="btn-edit" onclick="startEditDoctor(${spec.id}, ${d.id}, event)">تعديل</button>
+        <button type="button" class="btn-del" onclick="deleteDoctor(${spec.id}, ${d.id})">حذف</button>
+      ` : '';
+
+      return `
+        <div class="doc-card">
+          <div class="doc-head">
+            <div class="doc-identity">
+              <div class="thumb-box">${getIconHtml(d.icon || '👨‍⚕️', d.docName)}</div>
+              <div>
+                <h3 class="doc-name">${d.docName}</h3>
+                ${showSpecBadge ? `<div class="doc-spec-sub">${spec.name}</div>` : ''}
+              </div>
+            </div>
+            <span class="price-tag">التذكرة: ${d.ticketPrice ? d.ticketPrice + ' ألف' : '-'}</span>
+          </div>
+          <div class="meta">
+            <div><strong>الأيام:</strong> ${d.workDays || '-'}</div>
+            <div><strong>الزمن:</strong> ${d.workTime || '-'}</div>
+            <div><strong>الموقع:</strong> ${d.location || '-'}</div>
+            <div><strong>رقم الحجز:</strong> ${d.bookingNo || d.whatsappNo || '-'}</div>
+          </div>
+          ${(callBtn || waBtn || manageBtns) ? `<div class="card-actions">${waBtn}${callBtn}${manageBtns}</div>` : ''}
+        </div>
+      `;
+    }
+
+    function render() {
+      const select = document.getElementById('specSelect');
+      const currentSpec = select.value;
+      select.innerHTML = data.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
+      if (editingSpecId) select.value = editingSpecId;
+      else if (selectedSpecId) select.value = selectedSpecId;
+      else if (currentSpec) select.value = currentSpec;
+
+      const q = document.getElementById('searchBox').value.trim().toLowerCase();
+      const out = document.getElementById('output');
+      const backBtn = document.getElementById('backBtn');
+      const listHeading = document.getElementById('listHeading');
+      const listCount = document.getElementById('listCount');
+
+      if (!data.length) {
+        backBtn.style.display = 'none';
+        listHeading.textContent = 'التخصصات الطبية';
+        listCount.textContent = '(0 تخصص)';
+        out.innerHTML = `<div class="empty-msg">لا توجد تخصصات مضافة بعد.</div>`;
+        return;
+      }
+
+      if (q) {
+        backBtn.style.display = 'none';
+        listHeading.textContent = 'نتائج البحث';
+        const matches = [];
+        data.forEach(spec => {
+          spec.doctors.forEach(doc => {
+            const hit = spec.name.toLowerCase().includes(q) ||
+              (spec.desc && spec.desc.toLowerCase().includes(q)) ||
+              doc.docName.toLowerCase().includes(q) ||
+              (doc.location && doc.location.toLowerCase().includes(q));
+            if (hit) matches.push({ spec, doc });
+          });
+        });
+        listCount.textContent = `(${matches.length} نتيجة)`;
+        out.innerHTML = matches.length
+          ? matches.map(({ spec, doc }) => renderDoctorCard(spec, doc, true)).join('')
+          : `<div class="empty-msg">لا توجد نتائج مطابقة لبحثك.</div>`;
+        return;
+      }
+
+      if (selectedSpecId !== null) {
+        const spec = data.find(s => s.id === selectedSpecId);
+        if (!spec) { selectedSpecId = null; render(); return; }
+        backBtn.style.display = 'inline-flex';
+        listHeading.textContent = spec.name;
+        listCount.textContent = `(${spec.doctors.length} طبيب متاح)`;
+
+        const manageSpecBar = isManageMode ? `
+          <div class="card" style="display:flex; justify-content:space-between; align-items:center; padding:12px; gap:8px; flex-wrap:wrap;">
+            <strong>إدارة ${spec.name}</strong>
+            <div style="display:flex; gap:8px;">
+              <button type="button" class="btn-icon-pick" onclick="triggerQuickIconEdit('spec', ${spec.id}, null, event)">تغيير الأيقونة</button>
+              <button type="button" class="btn-del" onclick="deleteSpecialty(${spec.id}, event)">حذف التخصص</button>
+            </div>
+          </div>
+        ` : '';
+
+        const docsHtml = spec.doctors.length
+          ? spec.doctors.map(d => renderDoctorCard(spec, d, false)).join('')
+          : `<div class="empty-msg">لا يوجد أطباء حالياً في هذا التخصص.</div>`;
+
+        out.innerHTML = `${manageSpecBar}${docsHtml}`;
+        return;
+      }
+
+      backBtn.style.display = 'none';
+      listHeading.textContent = 'التخصصات الطبية';
+      listCount.textContent = `(${data.length} تخصص)`;
+
+      out.innerHTML = data.map(spec => {
+        const count = spec.doctors.length;
+        const availText = count > 0 ? `${count} طبيب متاح` : 'لا يوجد أطباء حالياً';
+        const specManageFoot = isManageMode ? `
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="btn-icon-pick" onclick="triggerQuickIconEdit('spec', ${spec.id}, null, event)">أيقونة</button>
+            <button type="button" class="btn-del" onclick="deleteSpecialty(${spec.id}, event)">حذف</button>
+          </div>
+        ` : '';
+
+        return `
+          <div class="spec-card" onclick="openSpecialty(${spec.id})">
+            <div class="spec-card-main">
+              <span class="spec-arrow">←</span>
+              <div class="spec-text-col">
+                <h3 class="spec-card-title">${spec.name}</h3>
+                <p class="spec-card-desc">${spec.desc || 'استعراض الأطباء ومواعيد القدوم وسعر التذكرة.'}</p>
+              </div>
+              <div class="thumb-box">${getIconHtml(spec.icon || '🩺', spec.name)}</div>
+            </div>
+            <div class="spec-card-foot">
+              <span class="avail-label ${count > 0 ? 'has-docs' : ''}">${availText}</span>
+              ${specManageFoot}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function exportBackup() {
+      const payload = { appTitle, appDesc, appIcon, data, exportedAt: new Date().toISOString() };
+      const jsonText = JSON.stringify(payload, null, 2);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(jsonText).catch(() => {});
+      }
+      prompt('تم تجهيز النسخة الاحتياطية (انسخ النص أدناه واحفظه في مذكرة أو ملف):', jsonText);
+    }
+
+
+    function importBackup(event) {
+      if (!isManageMode) return;
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (!parsed || !Array.isArray(parsed.data)) return alert('ملف النسخة الاحتياطية غير صالح');
+          data = parsed.data;
+          if (parsed.appTitle) appTitle = parsed.appTitle;
+          if (parsed.appDesc) appDesc = parsed.appDesc;
+          if (parsed.appIcon) appIcon = parsed.appIcon;
+          localStorage.setItem('clinics_directory', JSON.stringify(data));
+          localStorage.setItem('clinics_app_title', appTitle);
+          localStorage.setItem('clinics_app_desc', appDesc);
+          localStorage.setItem('clinics_app_icon', appIcon);
+          applyBrandingUI(); render();
+          alert('تم استيراد النسخة الاحتياطية بنجاح');
+        } catch (err) { alert('تعذر قراءة الملف'); }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    applyBrandingUI();
+    renderPresetChips();
+    applyManageModeUI();
+  </script>
+</body>
+</html>
